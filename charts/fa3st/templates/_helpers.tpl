@@ -54,9 +54,9 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Create the name of the service account to use
 */}}
 {{- define "faaast-service.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "faaast-service.fullname" .) .Values.serviceAccount.name }}
+{{- if .Values.fa3st.serviceAccount.create }}
+{{- default (include "faaast-service.fullname" .) .Values.fa3st.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.serviceAccount.name }}
+{{- default "default" .Values.fa3st.serviceAccount.name }}
 {{- end }}
 {{- end }}

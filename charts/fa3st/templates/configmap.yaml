@@ -8,20 +8,20 @@ data:
   config.json: |
     {
       "persistence": {
-        "@class": "{{ .Values.persistence.class }}"
+        "@class": "{{ .Values.fa3st.persistence.class }}"
       },
       "messageBus": {
-        "@class": "{{ .Values.messageBus.class }}",
-        "host": "{{ .Values.messageBus.host }}",
-        "user": "{{ .Values.messageBus.user }}",
-        "password": "{{ .Values.messageBus.password }}"
+        "@class": "{{ .Values.fa3st.messageBus.class }}",
+        "host": "{{ .Values.fa3st.messageBus.host }}",
+        "user": "{{ .Values.fa3st.messageBus.user }}",
+        "password": "{{ .Values.fa3st.messageBus.password }}"
       },
       "endpoints": [
         {
-          "@class": "{{ (index .Values.endpoints 0).class }}",
-          "port": {{ (index .Values.endpoints 0).port }},
-          "corsEnabled": {{ (index .Values.endpoints 0).corsEnabled }},
-          "sslEnabled": {{ (index .Values.endpoints 0).sslEnabled }}
+          "@class": "{{ (index .Values.fa3st.endpoints 0).class }}",
+          "port": {{ (index .Values.fa3st.endpoints 0).port }},
+          "corsEnabled": {{ (index .Values.fa3st.endpoints 0).corsEnabled }},
+          "sslEnabled": {{ (index .Values.fa3st.endpoints 0).sslEnabled }}
         }
       ]
     }
