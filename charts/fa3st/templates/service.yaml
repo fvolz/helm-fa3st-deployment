@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ include "faaast-service.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include (printf "%s.name" .Chart.Name) . }}
+    app.kubernetes.io/name: {{ include "faaast-service.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
   type: {{ .Values.service.type }}
@@ -13,5 +13,5 @@ spec:
       protocol: TCP
       name: https
   selector:
-    app.kubernetes.io/name: {{ include (printf "%s.name" .Chart.Name) . }}
+    app.kubernetes.io/name: {{ include "faaast-service.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
