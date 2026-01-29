@@ -36,7 +36,7 @@ fa3st:
       enabled: true
       secretName: faaast-service-basic-auth
       # pre-generated htpasswd line, e.g. "user1:$apr1$..."
-      htpasswd: "fa3st:$apr1$YksgQb1y$3jeJdh6/JxPsfAxdsj3yE1"
+      htpasswd: "berger:$apr1$RY15tzK4$xHy0Pcun.kbmxM/1zIFeS."
       
     config:
       mountPath: "/app/config/config.json"
