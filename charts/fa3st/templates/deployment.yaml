@@ -45,43 +45,43 @@ spec:
           imagePullPolicy: {{ .Values.fa3st.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.fa3st.service.port }}
+              containerPort: {{ (index .Values.fa3st.endpoints 0).port }}
               protocol: TCP
-           {{- with .Values.fa3st.livenessProbe }}
-            livenessProbe:
+          {{- with .Values.fa3st.livenessProbe }}
+          livenessProbe:
             {{- toYaml . | nindent 12 }}
-           {{- end }}
+          {{- end }}
           {{- with .Values.fa3st.readinessProbe }}
           readinessProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-           {{- with .Values.fa3st.resources }}
-            resources:
+          {{- with .Values.fa3st.resources }}
+          resources:
             {{- toYaml . | nindent 12 }}
-           {{- end }}
+          {{- end }}
           volumeMounts:
             - name: config-volume
               mountPath: {{ .Values.fa3st.config.mountPath }}
               subPath: config.json
-          {{- with .Values.fa3st.volumeMounts }}
+            {{- with .Values.fa3st.volumeMounts }}
             {{- toYaml . | nindent 12 }}
-          {{- end }}
-        volumes:
-          - name: config-volume
-            configMap:
-              name: {{ include "faaast-service.fullname" . }}-config
-          {{- with .Values.fa3st.volumes }}
-            {{- toYaml . | nindent 8 }}
-          {{- end }}
-       {{- with .Values.fa3st.nodeSelector }}
-       nodeSelector:
-         {{- toYaml . | nindent 8 }}
-       {{- end }}
-       {{- with .Values.fa3st.affinity }}
-       affinity:
-         {{- toYaml . | nindent 8 }}
-       {{- end }}
-       {{- with .Values.fa3st.tolerations }}
-       tolerations:
-         {{- toYaml . | nindent 8 }}
-       {{- end }}
+            {{- end }}
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "faaast-service.fullname" . }}-config
+        {{- with .Values.fa3st.volumes }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.fa3st.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.fa3st.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.fa3st.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

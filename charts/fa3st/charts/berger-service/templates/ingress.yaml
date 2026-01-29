@@ -1,21 +1,21 @@
-{{- if .Values.berger-service.ingress.enabled -}}
+{{- if .Values.ingress.enabled -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "faaast-service.fullname" . }}
+  name: {{ include "berger-service.fullname" . }}
   labels:
-    {{- include "faaast-service.labels" . | nindent 4 }}
-  {{- with .Values.berger-service.ingress.annotations }}
+    {{- include "berger-service.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- with .Values.berger-service.ingress.className }}
+  {{- with .Values.ingress.className }}
   ingressClassName: {{ . }}
   {{- end }}
-  {{- if .Values.berger-service.ingress.tls }}
+  {{- if .Values.ingress.tls }}
   tls:
-    {{- range .Values.berger-service.ingress.tls }}
+    {{- range .Values.ingress.tls }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}
@@ -24,7 +24,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.berger-service.ingress.hosts }}
+    {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
@@ -35,9 +35,9 @@ spec:
             {{- end }}
             backend:
               service:
-                name: {{ include "faaast-service.fullname" $ }}
+                name: {{ include "berger-service.fullname" $ }}
                 port:
-                  number: {{ $.Values.berger-service.service.port }}
+                  number: {{ $.Values.service.port }}
           {{- end }}
     {{- end }}
 {{- end }}

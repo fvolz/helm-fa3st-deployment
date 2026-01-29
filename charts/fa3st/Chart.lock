@@ -1,0 +1,6 @@
+dependencies:
+- name: berger-service
+  repository: file://charts/berger-service
+  version: 0.1.0
+digest: sha256:cfa91b68178543720f55b2074b13955fcc981187603b3a1c37748967c478505f
+generated: "2026-01-29T10:46:00.8826098+01:00"
