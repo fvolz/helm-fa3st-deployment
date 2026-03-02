@@ -43,6 +43,10 @@ fa3st:
 
     persistence:
       class: "de.fraunhofer.iosb.ilt.faaast.service.persistence.memory.PersistenceInMemory"
+      initialModel:
+        enabled: true
+        mountPath: "/app/model"
+        fileName: "model.aasx"
 
     messageBus:
       class: "de.fraunhofer.iosb.ilt.faaast.service.messagebus.cloudevents.MessageBusCloudevents"
@@ -103,10 +107,10 @@ berger-service:
       class: "de.fraunhofer.iosb.ilt.faaast.service.persistence.memory.PersistenceInMemory"
 
     messageBus:
-      class: "de.fraunhofer.iosb.ilt.faaast.service.messagebus.cloudevents.MessageBusCloudevents"
-      host: "wss://mqttbroker.factory-x.catena-x.net:443"
-      user: "fx-factory"
-      password: "placeholder"
+      class: "de.fraunhofer.iosb.ilt.faaast.service.messagebus.internal.MessageBusInternal"
+      host: ""
+      user: ""
+      password: ""
 
     endpoints:
       - class: "de.fraunhofer.iosb.ilt.faaast.service.endpoint.http.HttpEndpoint"

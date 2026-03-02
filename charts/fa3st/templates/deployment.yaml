@@ -63,6 +63,11 @@ spec:
             - name: config-volume
               mountPath: {{ .Values.fa3st.config.mountPath }}
               subPath: config.json
+            {{- if .Values.fa3st.persistence.initialModel.enabled }}
+            - name: model-volume
+              mountPath: {{ .Values.fa3st.persistence.initialModel.mountPath }}/{{ .Values.fa3st.persistence.initialModel.fileName }}
+              subPath: {{ .Values.fa3st.persistence.initialModel.fileName }}
+            {{- end }}
             {{- with .Values.fa3st.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -70,6 +75,11 @@ spec:
         - name: config-volume
           configMap:
             name: {{ include "faaast-service.fullname" . }}-config
+        {{- if .Values.fa3st.persistence.initialModel.enabled }}
+        - name: model-volume
+          configMap:
+            name: {{ include "faaast-service.fullname" . }}-model
+        {{- end }}
         {{- with .Values.fa3st.volumes }}
         {{- toYaml . | nindent 8 }}
         {{- end }}

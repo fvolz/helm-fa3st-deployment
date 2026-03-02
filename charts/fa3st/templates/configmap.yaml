@@ -9,6 +9,9 @@ data:
     {
       "persistence": {
         "@class": "{{ .Values.fa3st.persistence.class }}"
+        {{- if .Values.fa3st.persistence.initialModel.enabled }}
+        ,"initialModel": "{{ .Values.fa3st.persistence.initialModel.mountPath }}/{{ .Values.fa3st.persistence.initialModel.fileName }}"
+        {{- end }}
       },
       "messageBus": {
         "@class": "{{ .Values.fa3st.messageBus.class }}",

@@ -1,0 +1,10 @@
+{{- if .Values.fa3st.persistence.initialModel.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "faaast-service.fullname" . }}-model
+  labels:
+    {{- include "faaast-service.labels" . | nindent 4 }}
+binaryData:
+  {{ .Values.fa3st.persistence.initialModel.fileName }}: {{ .Files.Get "files/model.aasx" | b64enc | quote }}
+{{- end }}
